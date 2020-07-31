@@ -35,12 +35,54 @@ public class StudentRepositoryTest {
     }
 
     @Test
+    public void deleteUserTest() {
+        String email1 = "petro@gmail.com";
+        User user = userRepository.findUserByEmail(email1);
+        Assertions.assertEquals("Petro", user.getFirstname());
+        Long size = userRepository.count();
+
+        userRepository.delete(user);
+        Assertions.assertEquals(userRepository.count() - size, -1);
+    }
+
+    @Test
+    public void deleteAllUserTest() {
+        userRepository.deleteAll();
+        Assertions.assertEquals(userRepository.count(), 0);
+    }
+
+    @Test
+    public void updateUserTest() {
+        String newEmail = "newEmail.com";
+
+        String email1 = "petro@gmail.com";
+        User user = userRepository.findUserByEmail(email1);
+        Assertions.assertEquals("Petro", user.getFirstname());
+
+        user.setEmail(newEmail);
+        userRepository.save(user);
+        User usersActual = userRepository.findUserByEmail(newEmail);
+        Assertions.assertEquals("Petro", user.getFirstname());
+    }
+
+    @Test
     public void findByRoleTest() {
         List<User> userList1 = userRepository.findByRole("STUDENT");
         Assertions.assertTrue(userList1.size() == 3);
 
         List<User> userList2 = userRepository.findByRole("MANAGER");
         Assertions.assertTrue(userList2.size() == 1);
+    }
+
+    @Test
+    public void findByEmailTest() {
+        String email1 = "petro@gmail.com";
+        User user = userRepository.findUserByEmail(email1);
+        Assertions.assertEquals("Petro", user.getFirstname());
+
+        String email2 = "pero@gmail.com";
+        User user2 = userRepository.findUserByEmail(email2);
+        Assertions.assertNull(user2);
     }
 
 }
