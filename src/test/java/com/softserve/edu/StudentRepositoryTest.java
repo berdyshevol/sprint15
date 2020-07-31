@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+import java.util.List;
+
 @DataJpaTest
 public class StudentRepositoryTest {
     @Autowired
@@ -31,4 +33,14 @@ public class StudentRepositoryTest {
 
         Assertions.assertEquals("firstName", actual.getFirstname());
     }
+
+    @Test
+    public void findByRoleTest() {
+        List<User> userList1 = userRepository.findByRole("STUDENT");
+        Assertions.assertTrue(userList1.size() == 3);
+
+        List<User> userList2 = userRepository.findByRole("MANAGER");
+        Assertions.assertTrue(userList2.size() == 1);
+    }
+
 }
