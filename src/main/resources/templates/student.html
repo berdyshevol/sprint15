@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Add student</title>
+</head>
+<body>
+<div th:insert="~{header :: menu}"/>
+<h1>Add User</h1>
+    <form class="px-4 py-3" th:action="@{/students/add}" th:object="${student}" method="post">
+        <div class="form-group">
+            <label for="email">Email: <input type="email" class="form-control" th:field="*{email}"/></label>
+        </div>
+        <div class="form-group">
+            <label for="firstname">Firstname: <input type="text" class="form-control" th:field="*{firstname}"/></label>
+        </div>
+        <div class="form-group">
+            <label for="lastname">Lastname: <input type="text" class="form-control" th:field="*{lastname}"/></label>
+        </div>
+        <p><input type="submit" class="btn btn-primary" value="Add user"/></p>
+    </form>
+</body>
+</html>
