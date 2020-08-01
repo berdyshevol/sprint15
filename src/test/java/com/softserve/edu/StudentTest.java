@@ -66,23 +66,23 @@ public class StudentTest {
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
     }
 
-//    @Test
-//    public void testStudentsListOfMarathon() throws Exception {
-//        Marathon marathonE = marathonService.findById(1);
-//        List<User> userE = userService.findByRole(Role.STUDENT);
-//
-//        mockMvc.perform(MockMvcRequestBuilders.get("/students/1"))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.model().attributeExists("marathon"))
-//                .andExpect(MockMvcResultMatchers.model().attribute("marathon", marathonE))
-//                .andExpect(MockMvcResultMatchers.model().attributeExists("students"))
-//                .andExpect(MockMvcResultMatchers.model().attribute("students", userE))
-//                ;
-//    }
+    @Test
+    public void testStudentsListOfMarathon() throws Exception {
+        Marathon marathonE = marathonService.findById(1);
+        List<User> userE = userService.findByRole(Role.STUDENT);
 
-//    @Test
-//    public void testAddToMarathon() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.get("/students/1/add/1"))
-//                .andExpect(MockMvcResultMatchers.status().isOk());
-//    }
+        mockMvc.perform(MockMvcRequestBuilders.get("/students/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.model().attributeExists("marathon"))
+                .andExpect(MockMvcResultMatchers.model().attribute("marathon", marathonE))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("students"))
+                .andExpect(MockMvcResultMatchers.model().attribute("students", userE))
+                ;
+    }
+
+    @Test
+    public void testAddToMarathon() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/students/1/add/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }

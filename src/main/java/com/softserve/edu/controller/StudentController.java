@@ -34,14 +34,12 @@ public class StudentController {
 
     @GetMapping("/add")
     String gotoStudent(Model model) {
-        logger.info("on Add page");
         model.addAttribute("student", new User());
         return "student";
     }
 
     @PostMapping("/add")
     String addStudent(@ModelAttribute User student) {
-        logger.info("added");
         student.setRole(Role.STUDENT);
         userService.save(student);
         return "redirect:";
@@ -49,7 +47,6 @@ public class StudentController {
 
     @GetMapping("/edit/{id}")
     String edit(@PathVariable Integer id, Model model) {
-        logger.info("edit id=" + id);
         User student = userService.findById(id);
         model.addAttribute("student", student);
         return "student_edit";
@@ -57,7 +54,6 @@ public class StudentController {
 
     @PostMapping("/edit/{id}")
     String editStudent(@ModelAttribute User editedStudent, @PathVariable Integer id) {
-        logger.info("id=" + id + " is edited");
         User student = userService.findById(id);
         student.setEmail(editedStudent.getEmail());
         student.setFirstname(editedStudent.getFirstname());
@@ -68,14 +64,12 @@ public class StudentController {
 
     @GetMapping("/delete/{id}")
     String removeStudent(@PathVariable Integer id) {
-        logger.info("delete id=" + id);
         userService.removeStudent(userService.findById(id));
         return "redirect:";
     }
 
     @GetMapping("/{id}")
     String addToMarathon(@PathVariable Integer id, Model model) {
-        logger.info("list of students at marathon " + id);
         Marathon marathon = marathonService.findById(id);
         model.addAttribute("marathon", marathon);
         model.addAttribute("students", userService.findByRole(Role.STUDENT));
@@ -84,7 +78,6 @@ public class StudentController {
 
     @GetMapping("/{m_id}/add/{s_id}")
     String addStudentToMarathon(@PathVariable("m_id") Integer marathonId, @PathVariable("s_id") Integer studentId, Model model) {
-        logger.info("Stident with id=" + studentId + "is added to marathon id=" + marathonId);
         userService.addToMarathon(studentId, marathonId);
         model.addAttribute("id", marathonId);
         return "redirect:/students";
